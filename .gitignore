@@ -1,0 +1,7 @@
+.idea/
+/coverage/
+/vendor/
+/logs/*
+!/logs/README.md
+/private.key
+/public.key
