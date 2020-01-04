@@ -56,6 +56,6 @@
     "scripts": {
         "start": "php -S localhost:8080 -t public",
         "test": "phpunit",
-        "app": "php bin/app.php --ansi"
+        "app": "php bin/app.php --ansi --no-interaction"
     }
 }
