@@ -1,0 +1,6 @@
+*
+!cache
+!cache/.gitkeep
+!logs
+!logs/.gitkeep
+!.gitignore
