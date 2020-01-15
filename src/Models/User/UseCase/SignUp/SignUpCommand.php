@@ -5,7 +5,7 @@ namespace App\Models\User\UseCase\SignUp;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class RegistrationRequest
+class SignUpCommand
 {
     /**
      * @Assert\NotBlank()
