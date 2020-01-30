@@ -1,0 +1,10 @@
+FROM php:7.4-cli
+
+RUN apt-get update && apt-get install -y libmcrypt-dev zlib1g-dev libpq-dev wget zip \
+    && docker-php-ext-install bcmath pdo pdo_mysql
+
+RUN wget https://getcomposer.org/installer -O - -q | php -- --install-dir=/bin --filename=composer --quiet
+
+ADD ./php/default.ini /usr/local/etc/php/conf.d/default.ini
+
+WORKDIR /var/www

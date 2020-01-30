@@ -1,18 +1,42 @@
-version: '3.7'
-
-volumes:
-    logs:
-        driver: local
-
+version: '3'
 services:
-    slim:
-        image: php:7-alpine
-        working_dir: /var/www
-        command: php -S 0.0.0.0:8080 -t public
-        environment:
-            docker: "true"
-        ports:
-            - 8080:8080
+    nginx:
+        build:
+            context: ./docker
+            dockerfile: nginx.docker
         volumes:
-            - .:/var/www
-            - logs:/var/www/logs
+            - ./:/var/www/api
+        ports:
+            - "8081:80"
+    php-fpm:
+        build:
+            context: ./docker
+            dockerfile: php-fpm.docker
+        container_name: php-fpm
+        depends_on:
+            - mysql
+        volumes:
+            - ./:/var/www/api
+    php-cli:
+        build:
+            context: ./docker
+            dockerfile: php-cli.docker
+        container_name: php-cli
+        depends_on:
+            - mysql
+        volumes:
+            - ./:/var/www/api
+        working_dir: /var/www/api
+        tty: true
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        environment:
+            - MYSQL_DATABASE=slim
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_USER=admin
+            - MYSQL_PASSWORD=secret
+        ports:
+            - "8989:3306"
+        volumes:
+            - "./mysql:/var/lib/mysql"
