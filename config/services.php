@@ -1,11 +1,11 @@
 <?php
 
-use App\Domain\User\UserRepository;
 use App\Http\Validator\Validator;
 use App\Infrastructure\Models\User\Entity\DoctrineUserRepository;
 use App\Infrastructure\Models\User\Service\BcryptPasswordHasher;
 use App\Infrastructure\Service\DoctrineFlusher;
 use App\Models\Flusher;
+use App\Models\User\Entity\UserRepository;
 use App\Models\User\Service\PasswordHasher;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;

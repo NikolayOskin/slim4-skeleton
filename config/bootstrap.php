@@ -7,7 +7,7 @@ use Slim\Factory\ServerRequestCreatorFactory;
     $container = require 'config/container.php';
     $app = \DI\Bridge\Slim\Bridge::create($container);
 
-    //$callableResolver = $app->getCallableResolver();
+    $callableResolver = $app->getCallableResolver();
 
     (require 'config/middleware.php')($app);
     (require 'config/routes.php')($app);
