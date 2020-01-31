@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Infrastructure\Models\User;
+namespace App\Infrastructure\Models\User\Service;
 
 use App\Models\User\Service\PasswordHasher;
 
