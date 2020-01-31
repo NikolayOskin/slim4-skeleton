@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Middleware\DomainExceptionMiddleware;
 use App\Http\Validator\Validator;
+use App\Infrastructure\Models\Auth\Entity\RefreshTokenRepository;
 use App\Infrastructure\Models\User\Entity\DoctrineUserRepository;
 use App\Infrastructure\Models\User\Service\BcryptPasswordHasher;
 use App\Infrastructure\Service\DoctrineFlusher;
@@ -58,6 +60,11 @@ return [
     UserRepository::class => function (ContainerInterface $c) {
         return new DoctrineUserRepository($c->get(EntityManager::class));
     },
+    RefreshTokenRepository::class => function (ContainerInterface $c) {
+        $settings = $c->get('settings');
+
+        return new RefreshTokenRepository($c->get(EntityManager::class), $settings['auth']['refresh_token_expire_interval']);
+    },
     PasswordHasher::class => function () {
         return new BcryptPasswordHasher();
     },
@@ -72,5 +79,10 @@ return [
     },
     Validator::class => function (ContainerInterface $c) {
         return new Validator($c->get(ValidatorInterface::class));
-    }
+    },
+
+    // Middlewares
+//    DomainExceptionMiddleware::class => function () {
+//        return new DomainExceptionMiddleware();
+//    }
 ];
