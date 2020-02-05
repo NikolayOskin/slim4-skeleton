@@ -1,26 +1,4 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
-    "keywords": [
-        "microframework",
-        "rest",
-        "router",
-        "psr7"
-    ],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
-        },
-        {
-            "name": "Pierre Berube",
-            "email": "pierre@lgse.com",
-            "homepage": "http://www.lgse.com/"
-        }
-    ],
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
@@ -39,6 +17,7 @@
         "symfony/validator": "^4.4"
     },
     "require-dev": {
+        "doctrine/data-fixtures": "^1.4",
         "phpunit/phpunit": "^7.5"
     },
     "config": {
@@ -57,7 +36,7 @@
     },
     "scripts": {
         "start": "php -S localhost:8080 -t public",
-        "test": "phpunit",
+        "test": "phpunit --colors=always",
         "app": "php bin/app.php --ansi --no-interaction"
     }
 }
