@@ -3,10 +3,11 @@
 namespace App\Models\User\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Webmozart\Assert\Assert;
 
 /**
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+// * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="users", uniqueConstraints={
  *     @ORM\UniqueConstraint(columns={"email"})
  * })
@@ -14,8 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -27,16 +29,23 @@ class User
     /**
      * @ORM\Column(type="string")
      */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $lastname;
-
-    /**
-     * @ORM\Column(type="string")
-     */
     private $password;
 
+    public function __construct(string $email, string $password)
+    {
+        Assert::notEmpty($email);
+        Assert::notEmpty($password);
+        $this->email = $email;
+        $this->password = $password;
+    }
+
+    public function getHash() : string
+    {
+        return $this->password;
+    }
+
+    public function getId() : int
+    {
+        return $this->id;
+    }
 }
